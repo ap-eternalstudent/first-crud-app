@@ -15,6 +15,7 @@
     </form>
     <ul class="quotes">
       <% for(var i = 0; i < quotes.length; i++) {%>
+      <div id="message"></div>
       <li class="quote">
         <span><%= quotes[i].name %></span>:
         <span><%= quotes[i].quote %></span>
