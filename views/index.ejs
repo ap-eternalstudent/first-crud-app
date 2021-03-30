@@ -19,6 +19,23 @@
       </form>
     </section>
     <section data-position="update-quote">
+=======
+    <h1>May Node and Express be with you</h1>
+    <form action="/quotes" method="POST">
+      <input type="text" placeholder="name" name="name" />
+      <input type="text" placeholder="quote" name="quote" />
+      <button type="submit">Submit</button>
+    </form>
+    <ul class="quotes">
+      <% for(var i = 0; i < quotes.length; i++) {%>
+      <div id="message"></div>
+      <li class="quote">
+        <span><%= quotes[i].name %></span>:
+        <span><%= quotes[i].quote %></span>
+      </li>
+      <% } %>
+    </ul>
+    <div>
       <h2>Darth Vader invades!</h2>
       <div>
         <ul class="quotes">
