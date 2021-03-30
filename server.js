@@ -26,50 +26,50 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
     // ========================
     // Routes
     // ========================
-    app.get("/", (req, res) => {
+    app.get("/", (request, response) => {
       db.collection("quotes")
         .find()
         .toArray()
         .then((quotes) => {
-          res.render("index.ejs", { quotes: quotes });
+          response.render("index.ejs", { quotes: quotes });
         })
         .catch((error) => console.error(error));
     });
 
-    app.post("/quotes", (req, res) => {
+    app.post("/quotes", (request, response) => {
       quotesCollection
-        .insertOne(req.body)
+        .insertOne(request.body)
         .then((result) => {
-          res.redirect("/");
+          response.redirect("/");
         })
         .catch((error) => console.error(error));
     });
 
-    app.put("/quotes", (req, res) => {
+    app.put("/quotes", (request, response) => {
       quotesCollection
         .findOneAndUpdate(
           { name: "Yoda" },
           {
             $set: {
-              name: req.body.name,
-              quote: req.body.quote,
+              name: request.body.name,
+              quote: request.body.quote,
             },
           },
           {
             upsert: true,
           }
         )
-        .then((result) => res.json("Success"))
+        .then((result) => response.json("Success"))
         .catch((error) => console.error(error));
     });
-    app.delete("/quotes", (req, res) => {
+    app.delete("/quotes", (request, response) => {
       quotesCollection
-        .deleteOne({ name: req.body.name })
+        .deleteOne({ name: request.body.name })
         .then((result) => {
           if (result.deletedCount === 0) {
-            return res.json("No quote to delete");
+            return response.json("No quote to delete");
           }
-          res.json("Deleted Darth Vadar's quote");
+          response.json("Deleted Darth Vader's quote");
         })
         .catch((error) => console.error(error));
     });
